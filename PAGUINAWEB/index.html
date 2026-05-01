@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rodrigo Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Orbitron',sans-serif;
+  background:#050507;
+  color:white;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+}
+.logo span{
+  color:#f7b500;
+}
+
+nav a{
+  margin:0 15px;
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.hero{
+  text-align:center;
+  padding:40px 20px;
+  background:radial-gradient(circle,#1a0033,#000);
+}
+
+.hero img{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  border:5px solid #8a2be2;
+  box-shadow:0 0 30px #8a2be2;
+}
+
+.hero h1{
+  margin-top:20px;
+  font-size:40px;
+}
+
+.hero span{
+  color:#f7b500;
+}
+
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+.social{
+  background:#0f0f15;
+  padding:15px 25px;
+  border-radius:10px;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.social:hover{
+  box-shadow:0 0 15px #8a2be2;
+  transform:translateY(-5px);
+}
+
+.products{
+  padding:50px 20px;
+  text-align:center;
+}
+
+.products h2{
+  font-size:28px;
+  margin-bottom:30px;
+}
+
+.products span{
+  color:#f7b500;
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:#0d0d14;
+  border-radius:15px;
+  width:320px;
+  padding:20px;
+  transition:0.3s;
+  box-shadow:0 0 15px rgba(138,43,226,0.4);
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #8a2be2;
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.card h3{
+  margin:15px 0;
+}
+
+.price{
+  color:#f7b500;
+  font-size:26px;
+  margin:15px 0;
+  text-align:center;
+  font-weight:bold;
+  background:rgba(247,181,0,0.1);
+  padding:8px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(247,181,0,0.3);
+}
+
+.btn{
+  display:inline-block;
+  background:#f7b500;
+  color:black;
+  padding:12px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#ffd84d;
+  transform:scale(1.05);
+}
+
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:white;
+  box-shadow:0 0 15px #25d366;
+  text-decoration:none;
+}
+.metodos-btn{
+  display:block;
+  margin:40px auto;
+  background:#8a2be2;
+  color:white;
+  padding:14px 25px;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 15px #8a2be2;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-content{
+  background:#0d0d14;
+  padding:30px;
+  border-radius:15px;
+  width:90%;
+  max-width:400px;
+  text-align:center;
+  box-shadow:0 0 20px #8a2be2;
+}
+
+.modal-content h3{
+  margin-bottom:20px;
+}
+
+.country{
+  display:block;
+  margin:10px 0;
+  padding:12px;
+  background:#f17807;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.country:hover{
+  background:#8a2be2;
+}
+
+.close{
+  margin-top:15px;
+  background:rgb(5, 240, 240);
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+
+
+/* GALERÍA DE PRUEBAS */
+.galeria-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:999;}
+.galeria-content{background:#0d0d14;padding:20px;border-radius:15px;width:95%;max-width:700px;box-shadow:0 0 20px #8a2be2;}
+.galeria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:15px;max-height:400px;overflow:auto;}
+.galeria-grid img{width:100%;border-radius:10px;}
+.upload-btn{margin-top:10px;background:#f7b500;color:black;padding:10px;border-radius:8px;cursor:pointer;display:inline-block;}
+
+
+
+/* BENEFICIOS */
+.beneficios{
+  padding:40px 20px;
+  text-align:center;
+}
+
+.beneficios-grid{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.beneficio{
+  background:#0d0d14;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 15px rgba(138,43,226,0.4);
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.beneficio:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #8a2be2;
+}
+
+
+
+/* OFERTA */
+.oferta{
+  text-align:center;
+  padding:30px 20px;
+  background:linear-gradient(90deg,#1a0033,#000);
+  box-shadow:0 0 20px #8a2be2;
+}
+
+.oferta h2{
+  color:#f7b500;
+  margin-bottom:10px;
+  text-shadow:0 0 15px #f7b500;
+}
+
+#contador{
+  font-size:28px;
+  font-weight:bold;
+  margin-top:10px;
+  color:#00ffcc;
+  text-shadow:0 0 10px #00ffcc;
+}
+
+
+
+/* TRAILER GAMER */
+.trailer{position:relative;height:100vh;overflow:hidden}
+.trailer video{width:100%;height:100%;object-fit:cover}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.contenido-trailer{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#fff}
+.contenido-trailer h1{font-size:52px;color:#00ffcc;text-shadow:0 0 20px #00ffcc,0 0 40px #00ffcc;animation:glow 1.5s infinite alternate}
+.contenido-trailer p{font-size:20px;margin:10px 0;color:#f7b500;text-shadow:0 0 10px #f7b500}
+.contenido-trailer button{padding:12px 26px;background:#ff0000;border:none;color:#fff;font-weight:700;border-radius:10px;cursor:pointer;box-shadow:0 0 15px red;transition:.3s}
+.contenido-trailer button:hover{transform:scale(1.1);box-shadow:0 0 30px red}
+@keyframes glow{from{opacity:.7}to{opacity:1}}
+
+
+
+/* VIDEO MODAL TIKTOK */
+.video-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  display:none;
+  z-index:9999;
+}
+
+.videos-container{
+  width:100%;
+  height:100%;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+}
+
+.videos-container video{
+  width:100%;
+  height:100vh;
+  object-fit:cover;
+  scroll-snap-align:start;
+}
+
+.video-modal video{
+  width:90%;
+  max-width:600px;
+  border-radius:10px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">RODRIGO <span>PANEL</span></div>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="#">Sobre mí</a>
+    <a href="#">Contacto</a>
+  </nav>
+</header>
+
+<!-- TRAILER GAMER -->
+<section class="trailer">
+  <video autoplay muted loop>
+    <source src="videos/intro.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="contenido-trailer">
+    <h1>RODRIGO PANEL</h1>
+    <p>🔥 DOMINA CADA PARTIDA 🔥</p>
+    <button onclick="window.location='#productos'">COMPRAR AHORA</button>
+  </div>
+</section>
+
+<!-- OFERTA LIMITADA -->
+<section class="oferta">
+  <h2>🔥 OFERTA POR TIEMPO LIMITADO 🔥</h2>
+  <p>Aprovecha descuentos exclusivos antes de que termine</p>
+  <div id="contador">00:00:00</div>
+</section>
+
+<section class="hero">
+  <img src="imagenes/imagen1.jpeg" alt="perfil">
+  <h1>RODRIGO <span>PANEL</span></h1>
+
+  <div class="socials">
+    <a href="https://wa.me/51952775386" target="_blank" class="btn">WhatsApp</a>
+    <a href="https://www.instagram.com/soyrodrigopt" target="_blank" class="btn">Instagram</a>
+    <a href="https://www.tiktok.com/@rodrigopanel" target="_blank" class="btn">TikTok</a>
+    <a href="https://discord.gg/Rwc2prT2" target="_blank" class="btn">Discord</a>
+    <a href="https://whatsapp.com/channel/0029VaDaFmXDjiOWR094G03v" target="_blank" class="btn gratis">
+  🎁 ACESSO GRATIS</a>
+  <button class="metodos-btn" onclick="abrirGaleria()">📸 VER PRUEBAS / REFERENCIAS</button>
+</div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="beneficios">
+  <div class="beneficios-grid">
+    <div class="beneficio">🔥 +500 Clientes Satisfechos</div>
+    <div class="beneficio">⚡ Entrega Inmediata</div>
+    <div class="beneficio">🛠 Soporte 24/7</div>
+    <div class="beneficio">🔄 Actualizaciones Constantes</div>
+  </div>
+</section>
+
+<section class="products">
+  <h2>PRODUCTOS <span>DESTACADOS</span></h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <img src="imagenes/holograma1.jpeg">
+      <h3>Android</h3>
+      <p>Con este prodcuto podras tener vision de todos los enemigos,ya sea sus armas o
+        cuerpo completo,tengo para free fire normal y ff max.
+      </p>
+      <div class="price">S/ 30 - $ 20</div>
+      
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/holo1.mp4')">🎬 Ver Video</button>
+    </div>
+
+    <div class="card">
+      <img src="imagenes/bypas.jpeg">
+      <h3>Pc o Lapto</h3>
+      <p>El bypass te ayudara a emparejar con puros moviles lo cual ya no te emparejara con hakers y tendras gran ventaja de ganar tus partidas.</p>
+      <div class="price">S/ 35 - $ 20</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/bypass.mp4')">🎬 Ver Video</button>
+    </div>
+
+    <div class="card">
+      <img src="imagenes/flou.jpeg">
+      <h3>Iphone</h3>
+      <p>Este panel lo usan muchos streamers conocidos,principalmente cuenta con 
+        aimbot,lineas,autopuntado,y muchas funciones más.</p>
+      <div class="price">S/ 120 - $ 50</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/iphone.mp4')">🎬 Ver Video</button>
+    </div>
+
+<div class="card">
+      <img src="imagenes/drip.jpeg">
+      <h3>Android</h3>
+      <p>Panel para cuenta secundaria,lo mas vendido y recomendado para acarrear cuentas ,podras pegar todo rojo, 
+        tener lineas, autopuntado y mucho mas.</p>
+      <div class="price">S/ 10 - $ 3</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/drip1.mp4')">🎬 Ver Video</button>
+    </div>
+
+<div class="card">
+      <img src="imagenes/dead.jpeg">
+      <h3>Pc o Lapto</h3>
+      <p>Panel para pc descarado para acarrear y subir cuentas facilmente,cuenta con aimbot todo rojo,speed,lineas ,autoapuntado
+        y muchas funciones más.</p>
+      <div class="price">S/ 35 - $ 20</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/dead.mp4')">🎬 Ver Video</button>
+    </div>
+
+<div class="cards">
+
+    <div class="card">
+      <img src="imagenes/red.jpeg">
+      <h3>Redes</h3>
+      <p>Aumentaras de vistas ,seguidores o likes en cualquier red social ya sea tiktok,youtube,instagram,etc.</p>
+      <div class="price">S/ 10 - $ 10</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/redes.mp4')">🎬 Ver Video</button>
+    </div>
+
+
+<div class="cards">
+
+    <div class="card">
+      <img src="imagenes/fake.jpeg">
+      <h3>Android</h3>
+      <p>Con este panel podras congelar a los enemigos,teletrasportarte de un lugar a otro y por ultimo pegar detras de las paredes</p>
+      <div class="price">S/ 30 - $ 20</div>
+      <a href="https://wa.me/51952775386" target="_blank" class="btn">Comprar por WhatsApp</a>
+      <button class="btn" onclick="abrirVideo('videos/fake.mp4')">🎬 Ver Video</button>
+    </div>
+
+  </div>
+</section>
+
+<button class="metodos-btn" onclick="abrirModal()">VER 💳MÉTODOS DE PAGO💳 POR PAÍS</button>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Selecciona tu país</h3>
+
+    <div class="country" onclick="irPago('peru')">🇵🇪 Perú</div>
+    <div class="country" onclick="irPago('mexico')">🇲🇽 México</div>
+    <div class="country" onclick="irPago('argentina')">🇦🇷 Argentina</div>
+    <div class="country" onclick="irPago('chile')">🇨🇱 Chile</div>
+    <div class="country" onclick="irPago('costa rica')">Costa Rica</div>
+    <div class="country" onclick="irPago('ecuador')">Ecuador</div>
+    <div class="country" onclick="irPago('nicaragua')">Nicaragua</div>
+    <div class="country" onclick="irPago('panamá')">Panamá</div>
+    <div class="country" onclick="irPago('paraguay')">Paraguay</div>
+    <div class="country" onclick="irPago('uruguay')">Uruguay</div>
+    <div class="country" onclick="irPago('bolivia')">Bolivia</div>
+    <div class="country" onclick="irPago('colombia')">Colombia</div>
+    <div class="country" onclick="irPago('venezuela')">Venezuela</div>
+    <div class="country" onclick="irPago('estados unidos')">Estados Unidos</div>
+    <div class="country" onclick="irPago('brasil')">Brasil</div>
+    <div class="country" onclick="irPago('república dominicana')">República Dominicana</div>
+    <div class="country" onclick="irPago('guatemala')">Guatemala</div>
+
+    <button class="close" onclick="cerrarModal()">Cerrar</button>
+  
+</div>
+
+</div>
+</div>
+
+<!-- GALERÍA -->
+<div class="galeria-modal" id="galeria">
+  <div class="galeria-content">
+    <h2>📸 PRUEBAS / REFERENCIAS</h2>
+    
+    <input type="file" id="subirImg" accept="image/*" multiple style="display:none;">
+    <label for="subirImg" class="upload-btn">➕ Subir imágenes</label>
+
+    <div class="galeria-grid" id="grid"></div>
+
+    <button class="close" onclick="cerrarGaleria()">Cerrar</button>
+  </div>
+</div>
+
+<a href="https://wa.me/51952775386" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+
+// GALERÍA
+function abrirGaleria(){
+  document.getElementById('galeria').style.display='flex';
+  cargarImagenes();
+}
+function cerrarGaleria(){
+  document.getElementById('galeria').style.display='none';
+}
+
+function guardarImagenes(arr){localStorage.setItem('imagenes_ref',JSON.stringify(arr));}
+function obtenerImagenes(){return JSON.parse(localStorage.getItem('imagenes_ref')||'[]');}
+
+function cargarImagenes(){
+  const grid=document.getElementById('grid');
+  const imgs=obtenerImagenes();
+  grid.innerHTML = imgs.map(src=>`<img src="${src}">`).join('');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const input=document.getElementById('subirImg');
+  input.addEventListener('change',function(){
+    const files=[...this.files];
+    let imgs=obtenerImagenes();
+
+    files.forEach(file=>{
+      const reader=new FileReader();
+      reader.onload=e=>{
+        imgs.push(e.target.result);
+        guardarImagenes(imgs);
+        cargarImagenes();
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+});
+
+
+function abrirModal(){
+  document.getElementById('modal').style.display='flex';
+}
+
+function cerrarModal(){
+  document.getElementById('modal').style.display='none';
+}
+
+function irPago(pais){
+  let contenido = "";
+
+  if(pais==='peru'){
+  
+    contenido = `
+      <h3>🇵🇪 Perú</h3>
+      <h3>Yape: 947163650</h3>
+      <h3>Nombre:Ramiro Pablo</h3>
+      <h3>BCP: 37090641354074</h3>
+      <h3>CCI: 00237019064135407458</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+
+  if(pais==='mexico'){
+    contenido = `
+      <h3>🇲🇽 México</h3>
+      <h3>MERCADO PAGO: 722969020449093637</h3>
+      <h3>BANCO AZTECA: 4027 6600 0680 9307</h3>
+      <h3>BANCO COPPEL: 4169 1611 1158 3638</h3>
+      <h3>NOMBRE: JESUS MORALES</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+
+  if(pais==='argentina'){
+    contenido = `
+      <h3>🇦🇷 Argentina</h3>
+      <h3>Mercado Pago: 0000003100006100224001</h3>
+      <h3>NOMBRE: Cristian Ezequiel Muñoz </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+
+  if(pais==='chile'){
+    contenido = `
+      <h3>🇨🇱 Chile</h3>
+      <h3>Cuenta RUT: 29.061.432-5</h3>
+      <h3>Banco Falabella: 19843276235</h3>
+      <h3>Nombre: Leonel Chávez</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+
+  if(pais==='costa rica'){
+    contenido = `
+      <h3>Costa Rica</h3>
+      <h3>Simpe Móvil: 62823166</h3>
+      <h3>Nombre: Wilber González </h3>
+      <h3>Equivalente: 1 dólar = 520 CRC</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+
+  if(pais==='ecuador'){
+    contenido = `
+      <h3>Ecuador</h3>
+      <h3>Banco Pichincha: 2210169007</h3>
+      <h3>Nombre: Rodríguez Martínez Michael</h3>
+      <h3>Transferencia Cuenta Ahorro Pichincha</h3>
+      <h3>Equivalente: 1 dólar = 1 dólar</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='nicaragua'){
+    contenido = `
+      <h3>nicaragua</h3>
+      <h3>Banco La Fise: 138061949 </h3>
+      <h3>Nombre: Petrona Centeno Zeas</h3>
+      <h3>Transferencia Iban:
+  NI23BCCE00000000000138061949</h3>
+      <h3>Equivalente: 1 dólar = 37 NIO </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='panamá'){
+    contenido = `
+      <h3>panamá</h3>
+      <h3>Banco Mercantil: 639999437</h3>
+      <h3>Nombre: Luis Stiven Vegas</h3>
+      <h3>Banco Zinli:vegasluis82@gmail.com</h3>
+      <h3>Equivalente: 1 dólar = 1 dólar</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='paraguay'){
+    contenido = `
+      <h3>paraguay</h3>
+      <h3>Banco Itaú:  320553574</h3>
+      <h3>Nombre:Yeruti Mariela </h3>
+      <h3>alias:yerutibaez25@gmail.com</h3>
+      <h3>CI:4988245</h3>
+      <h3>Equivalente: 1 dólar = 7500 PYG </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='uruguay'){
+    contenido = `
+      <h3>uruguay</h3>
+      <h3>Banco Prex CCI:  77600100000316083509</h3>
+      <h3>Nombre:ramiro pablo </h3>
+      <h3>Cuenta Prex: 14259691</h3>
+      <h3>Equivalente: 1 dólar = 50 UYU </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='bolivia'){
+    contenido = `
+      <h3>bolivia</h3>
+      <h3>yape: pide QR al whatsApp</h3>
+      <h3>Nombre:Florentino Choque </h3>
+      <h3>Equivalente: 1 dólar = 10 BOB </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='colombia'){
+    contenido = `
+      <h3>colombia</h3>
+      <h3>Banco Nequi: 3013980114</h3>
+      <h3>Nombre: Nataly Guiza</h3>
+      <h3>Equivalente: 1 dólar = 4,000 COP</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='venezuela'){
+    contenido = `
+      <h3>venezuela</h3>
+      <h3>Pago Móvil: 19158150</h3>
+      <h3>Nombre: Enmanuel Jose</h3>
+      <h3>Número de cuenta:0412 0100065 </h3>
+      <h3>Equivalente: 1 dólar = 680 VES</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='estados unidos'){
+    contenido = `
+      <h3>estados unidos</h3>
+      <h3>Paypal:  pablotoribioramiroestefano@gmail.com</h3>
+      <h3>Nombre:Francisco Esteban</h3>
+      <h3>Cuenta Zelle: 564 999 0063</h3>
+      <h3>Equivalente: 1 dólar = 1 dólar </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='brasil'){
+    contenido = `
+      <h3>brasil</h3>
+      <h3>Chave pix: ariannyyoselinp@gmail.com</h3>
+      <h3>Equivalente: 1 dólar = 5.40 BRL</h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='república dominicana'){
+    contenido = `
+      <h3>república dominicana</h3>
+      <h3>Banreservas:  9606178055</h3>
+      <h3>Nombre:Manuel Martinez</h3>
+      <h3>Banco Popular:  849314034</h3>
+      <h3>Pago Móvil QIK:  1002559567</h3>
+      <h3>Equivalente: 1 dólar = 75 DOP </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  if(pais==='guatemala'){
+    contenido = `
+      <h3>guatemala</h3>
+      <h3>Banco Rural: 4198224175</h3>
+      <h3>Nombre: Cesia Roxana Guevara </h3>
+      <h3>Transferencia Banrural</h3>
+      <h3>Equivalente: 1 dólar = 9 GTQ </h3>
+      <h3>MANDA CAPTURA AL WHATSAPP</h3>
+    `;
+  }
+  document.querySelector('.modal-content').innerHTML = contenido + '<button class="close" onclick="location.reload()">Volver</button>';
+
+// REDIRECCION WHATSAPP
+let mensaje = `https://wa.me/51952775386?text=Quiero%20comprar%20desde%20${pais}`;
+window.open(mensaje);
+}
+
+
+// CONTADOR OFERTA
+let tiempo = 3600; // 1 hora
+
+setInterval(()=>{
+  let h = Math.floor(tiempo/3600);
+  let m = Math.floor((tiempo%3600)/60);
+  let s = tiempo%60;
+
+  document.getElementById('contador').innerHTML = 
+    `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+
+  if(tiempo>0) tiempo--;
+},1000);
+
+</script>
+
+<a href="https://wa.me/51952775386" class="whatsapp-float" target="_blank">💬</a>
+
+
+
+<!-- VIDEO MODAL TIKTOK -->
+<div id="videoModal" class="video-modal">
+  <div class="videos-container"></div>
+</div>
+
+<script>
+function abrirVideo(src){
+  const modal = document.getElementById("videoModal");
+  const contenedor = document.querySelector(".videos-container");
+
+  contenedor.innerHTML = "";
+
+  const v = document.createElement("video");
+  v.src = src;
+  v.autoplay = true;
+  v.loop = true;
+  v.muted = true;
+  v.controls = true;
+  v.playsInline = true;
+  v.style.width = "90%";
+  v.style.maxWidth = "700px";
+  v.style.margin = "auto";
+  v.style.display = "block";
+
+  contenedor.appendChild(v);
+
+  modal.style.display = "flex";
+}
+
+// cerrar modal
+document.getElementById("videoModal").onclick = function(e){
+  if(e.target.id === "videoModal"){
+    this.style.display = "none";
+    const v = this.querySelector("video");
+    if(v) v.pause();
+  }
+};
+</script>
+
+</body>
+</html>
